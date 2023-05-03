@@ -6,7 +6,7 @@ using TMPro;
 
 public class BirdControlls : MonoBehaviour
 {
-    public Rigidbody2D rb;
+    private Rigidbody2D rb;
 
     public int score = 0;
     // true or false value that depends on the bird being alive or not
@@ -18,12 +18,13 @@ public class BirdControlls : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         isAlive = true;
+
     }
     // Update is called once per frame
     void Update()
     {
         
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.Space) && isAlive)
         rb.AddForce (new Vector2(0,1 * 200));
             
     }
@@ -40,7 +41,11 @@ public class BirdControlls : MonoBehaviour
 
     public void OnCollisionEnter2D(Collision2D other)
     {
-        // 
+        // Set alive to false on Collision
         isAlive = false;
+
+        GameOverScreen gameOverScript = GameObject.Find("GameOverScreen").GetComponent<GameOverScreen>();
+
+        gameOverScript.DisplayGameOver();
     }
 }

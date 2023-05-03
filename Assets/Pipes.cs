@@ -16,5 +16,12 @@ public class Pipes : MonoBehaviour
     void Update()
     {
        transform.Translate(Vector2.left * Time.deltaTime * speed);
+
+        // Destroys pipes off screen
+    if(transform.position.magnitude > 20f)
+    {
+        Destroy(gameObject);
     }
+    }
+    
 }
